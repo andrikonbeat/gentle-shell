@@ -49,8 +49,11 @@ test("Vim palette help names the opt-in editor and Pi slash handoff without prom
 
 test("Vim reference distinguishes supported commands, scope and slash divergence", () => {
 	const reference = readFileSync(new URL("../docs/readme-reference.md", import.meta.url), "utf8");
-	const section = reference.split("### Vim prompt editing\n")[1]?.split("\n### ")[0] ?? "";
-	for (const term of ["`/gentle:vim enable`", "`/gentle:vim disable`", "`status`", "VISUAL", "`Ctrl+[`", "`gg/G`", "`f/F/t/T`", "`d/c/y`", "`u`", "`.`", "Pi", "first line", "reverse prompt-history search", "0.99.1", "paste marker"]) {
+	// Stop at the next heading of any level: a sibling subsection must not
+	// leak its text into the Vim section, and the Vim section must not leak
+	// into the sections that follow it.
+	const section = reference.split("### Vim prompt editing\n")[1]?.split(/\n#{2,3} /)[0] ?? "";
+	for (const term of ["`/gentle:vim enable`", "`/gentle:vim disable`", "`/gentle:vim status`", "VISUAL", "`Ctrl+[`", "`gg/G`", "`f/F/t/T`", "`d/c/y`", "`u`", "`.`", "Pi", "first line", "reverse prompt-history search", "0.99.1", "paste marker"]) {
 		assert.ok(section.includes(term), `Vim reference missing ${term}`);
 	}
 	assert.doesNotMatch(section, /full Claude (?:Code )?parity/i);
@@ -667,6 +670,7 @@ test("COMMAND_PALETTE_CATALOG matches the curated command set, in order", () => 
 		"gentle:customize",
 		"gentle:animations",
 		"gentle:vim",
+		"gentle:retry",
 		"gentle:telemetry",
 		"gentle:dev-binary",
 	]);

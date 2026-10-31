@@ -28,6 +28,7 @@ export const COMMAND_PALETTE_CATALOG: readonly CommandPaletteCatalogGroup[] = [
 			{ command: "gentle:customize", label: "Customization · appearance + audio notifications" },
 			{ command: "gentle:animations", label: "Animation mode" },
 			{ command: "gentle:vim", label: "Vim opt-in · Pi slash commands" },
+			{ command: "gentle:retry", label: "Unlimited retry on 429/timeout" },
 			{ command: "gentle:telemetry", label: "Telemetry" },
 			{ command: "gentle:dev-binary", label: "Gentle AI dev binary" },
 		],
