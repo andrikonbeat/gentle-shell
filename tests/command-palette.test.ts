@@ -670,7 +670,6 @@ test("COMMAND_PALETTE_CATALOG matches the curated command set, in order", () => 
 		"gentle:customize",
 		"gentle:animations",
 		"gentle:vim",
-		"gentle:retry",
 		"gentle:telemetry",
 		"gentle:dev-binary",
 	]);
